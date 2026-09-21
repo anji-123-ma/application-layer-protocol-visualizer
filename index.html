@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Layer Protocol Visualizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Application Layer Protocol Visualizer</h1>
+      <p>Computer Networks • DNS • HTTP • SMTP • Streaming</p>
+    </div>
+    <span class="badge">GitHub Pages Ready</span>
+  </header>
+
+  <main class="dashboard">
+    <!-- LEFT PANEL -->
+    <section class="panel activity-panel">
+      <div class="panel-title">
+        <div>
+          <h2>Activity Panel</h2>
+          <p>Choose an application-layer activity.</p>
+        </div>
+        <span id="statusDot" class="status-dot"></span>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-mode="browse">Browsing</button>
+        <button class="tab" data-mode="mail">Mail</button>
+        <button class="tab" data-mode="stream">Streaming</button>
+      </div>
+
+      <div id="browseForm" class="activity-form">
+        <label for="urlInput">URL</label>
+        <div class="input-row">
+          <input id="urlInput" type="url" value="https://example.com/" placeholder="https://example.com/">
+          <button id="visitBtn" class="primary">Visit</button>
+        </div>
+        <p class="hint">Simulates DNS resolution followed by an HTTP request/response.</p>
+      </div>
+
+      <div id="mailForm" class="activity-form hidden">
+        <label for="toInput">To</label>
+        <input id="toInput" type="email" value="student@example.com" placeholder="recipient@example.com">
+        <label for="subjectInput">Subject</label>
+        <input id="subjectInput" type="text" value="Computer Networks Assignment">
+        <label for="bodyInput">Body</label>
+        <textarea id="bodyInput" rows="4">Hello, this is a simulated application-layer email.</textarea>
+        <button id="sendBtn" class="primary full">Send Email</button>
+        <p class="hint">Simulates DNS (optional) and an SMTP conversation.</p>
+      </div>
+
+      <div id="streamForm" class="activity-form hidden">
+        <label for="videoInput">Stream</label>
+        <input id="videoInput" type="text" value="Network Fundamentals Demo">
+        <label for="qualitySelect">Quality</label>
+        <select id="qualitySelect">
+          <option>360p</option>
+          <option selected>720p</option>
+          <option>1080p</option>
+        </select>
+        <button id="playBtn" class="primary full">▶ Play Stream</button>
+        <p class="hint">Simulates DNS, HTTP manifest/playlist requests and media segments.</p>
+      </div>
+
+      <div class="control-card">
+        <div class="control-heading">
+          <strong>Visualization Controls</strong>
+          <span id="stepCounter">0 / 0</span>
+        </div>
+        <div class="controls">
+          <button id="prevBtn">← Previous</button>
+          <button id="pauseBtn">Pause</button>
+          <button id="nextBtn">Next →</button>
+          <button id="replayBtn">Replay</button>
+        </div>
+      </div>
+
+      <div class="log-card">
+        <div class="control-heading">
+          <strong>Activity Log</strong>
+          <button id="clearLogBtn" class="small-btn">Clear</button>
+        </div>
+        <div id="activityLog" class="activity-log">
+          <div class="empty-log">No activity yet. Start Browsing, Mail, or Streaming.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <section class="panel protocol-panel">
+      <div class="panel-title">
+        <div>
+          <h2>Protocol Visualization Panel</h2>
+          <p id="protocolSubtitle">Perform an activity on the left to start the visualization.</p>
+        </div>
+        <span id="modeBadge" class="mode-badge">READY</span>
+      </div>
+
+      <div id="flowSummary" class="flow-summary">
+        <div class="summary-box">
+          <span>Client</span><strong id="clientSummary">Browser / Mail client</strong>
+        </div>
+        <div class="summary-arrow">⇄</div>
+        <div class="summary-box">
+          <span>Server</span><strong id="serverSummary">Application server</strong>
+        </div>
+      </div>
+
+      <div id="protocolSteps" class="protocol-steps">
+        <div class="welcome">
+          <div class="welcome-icon">⇄</div>
+          <h3>Protocol flow will appear here</h3>
+          <p>
+            Select an activity on the left. Each step shows the simulated
+            protocol message, direction, timing and important fields.
+          </p>
+        </div>
+      </div>
+
+      <div class="current-detail">
+        <div class="detail-header">
+          <span>Current message</span>
+          <span id="currentDirection">—</span>
+        </div>
+        <pre id="messageDetail">No protocol message selected.</pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Assignment: Dual-Panel Activity &amp; Protocol Visualizer</span>
+    <span>Simulation mode • No real network traffic is required</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
